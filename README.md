@@ -1,2 +1,2 @@
 # Pizzeria
-Projet de création d'une site web pour une pizzeria
+Projet de création d'un site web pour une pizzeria avec Node.js
