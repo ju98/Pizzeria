@@ -1,6 +1,6 @@
 //server side
 const mongoose=require('mongoose');
-	mongoose.connect('mongodb://localhost/site',{useNewUrlParser: true,  useUnifiedTopology: true});
+	mongoose.connect('mongodb://localhost/pizzeria',{useNewUrlParser: true,  useUnifiedTopology: true});
 	var db=mongoose.connection;
 	db.on('error',console.error.bind(console,'connection error:'));
 const bodyParser=require('body-parser');
