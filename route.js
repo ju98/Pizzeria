@@ -1,17 +1,6 @@
 var controller=require('./controller.js');
 
 const route=require('express').Router();
-/*
-	route.get('/polypizz', function(req, res) {
-		res.setHeader('Content-Type', 'text/plain');
-		res.send("Bienvenue dans notre pizzeria Poly'pizz ! ");
-	});
-*/
-	route.get('/polypizz/menu', function(req, res) {
-		res.setHeader('Content-Type', 'text/plain');
-		res.send("Voici le menu du jour de la pizzeria : "+ controller.afficherDailyMenu());
-	});
-
 
 	route.get('/polypizz/api/create',(req,res)=>{
 		res.send(controller.apiCreateForm());
@@ -36,6 +25,11 @@ const route=require('express').Router();
 	
 	route.get('/polypizz',(req,res)=>{
 		res.send("Express response. Bienvenue dans notre pizzeria Poly'pizz !");
+	});
+
+	route.get('/polypizz/menu-du-jour', function(req, res) {
+		res.setHeader('Content-Type', 'text/plain');
+		res.send("Voici le menu du jour de la pizzeria : "+ controller.afficherDailyMenu());
 	});
 
 module.exports=route;
