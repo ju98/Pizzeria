@@ -34,14 +34,14 @@ const route=require('express').Router();
 		//res.send('DELETE : Variable '+req.body.key+' reduces to 0.');
 	});
 	
-	//
+	//SHOW
 	route.get('/polypizz',(req,res)=>{
-		res.send("Express response. Bienvenue dans notre pizzeria Poly'pizz !");
+		controller.showPizzas(res);
 	});
 
-	route.get('/polypizz/menu-du-jour', function(req, res) {
+	route.get('/polypizz/offre-du-jour', function(req, res) {
 		res.setHeader('Content-Type', 'text/plain');
-		res.send("Voici le menu du jour de la pizzeria : "+ controller.afficherDailyMenu());
+		res.send("Voici l'offre du jour : "+ controller.afficherDailyOffer());
 	});
 
 module.exports=route;

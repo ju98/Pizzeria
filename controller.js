@@ -1,10 +1,25 @@
 var model=require('./model.js')
 
-module.exports.afficherDailyMenu = function() {
+module.exports.afficherDailyOffer = function() {
 	var date = new Date() //date actuelle 
 	var current_day = date.getDay()
-	return model.daily_menus[current_day];
-};
+	return model.daily_offer[current_day];
+}
+
+module.exports.showPizzas = function(res) {
+	model.Answer.find({}, function(err, answer) {
+		var result = "<html><body>Express response. Bienvenue dans notre pizzeria Poly'pizz !<br/><div><table>";
+		result += '<tr><td>key</td><td>name</td><td>ingredients</td><td>category</td><td>price</td></tr>';
+
+		for(var i=0; i<answer.length; i++) {
+			result += '<tr><td>'+answer[i].key+'</td><td>'+answer[i].name+'</td><td>'+answer[i].ingredients+'</td><td>'+answer[i].category+'</td><td>'+answer[i].price+'</td></tr>';
+		};
+
+		result += "</table></div></body></html>";
+		res.send(result);
+	});
+}
+
 
 module.exports.apiCreateForm = function() {
 	return '<html><body>CREATE<br/><form method="post" action="create"><div><label for="key">Key :</label><input type="number" name="key" /></div><div><label for="name">Name :</label><input type="text" name="name" /></div><div><label for="ingredients">Ingredients :</label><input type="text" name="ingredients" /></div><div><label for="category">Category :</label><input type="text" name="category" /></div><div><label for="price">Price :</label><input type="text" name="price" /></div><input type="submit" /></form></body></html>';
