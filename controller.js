@@ -8,11 +8,11 @@ module.exports.afficherDailyOffer = function() {
 
 module.exports.showPizzas = function(res) {
 	model.Answer.find({}, function(err, answer) {
-		var result = "<html><body>Express response. Bienvenue dans notre pizzeria Poly'pizz !<br/><div><table>";
+		var result = '<html><body>Express response. Bienvenue dans notre pizzeria Poly pizz !    <a href="polypizz/panier">Afficher le panier</a><br/><div><table>';
 		result += '<tr><td>key</td><td>name</td><td>ingredients</td><td>category</td><td>price</td></tr>';
 
 		for(var i=0; i<answer.length; i++) {
-			result += '<tr><td>'+answer[i].key+'</td><td>'+answer[i].name+'</td><td>'+answer[i].ingredients+'</td><td>'+answer[i].category+'</td><td>'+answer[i].price+'</td></tr>';
+			result += '<tr><td>'+answer[i].key+'</td><td>'+answer[i].name+'</td><td>'+answer[i].ingredients+'</td><td>'+answer[i].category+'</td><td>'+answer[i].price+'</td><td><a href="./polypizz/ajouterPanier/'+answer[i].key+'">ajouter</a></td></tr>';
 		};
 
 		result += "</table></div></body></html>";
@@ -60,4 +60,29 @@ module.exports.apiDelete = function(res, key) {
 		else{res.send('DELETE : Variable '+key+' reduces to 0.');}
 	});
 
+}
+
+module.exports.afficherPanier = function(res) {
+	var aff = '<html><head></head><body><p>Panier</p><div><table>';
+	for (i=0; i<model.panier.length; i++) {
+		aff+= '<tr><td>'+model.panier[i]+'</td><td><a href="./supprimerPanier/'+model.panier[i]+'">supprimer</a></td></tr>'
+	}
+	aff += '</table></div><a href="http://localhost:3000/polypizz">Retour  </a><a href="http://localhost:3000/polypizz/commander">  Commander</a></body></html>';
+	console.log(aff);
+	res.send(aff);
+}
+
+module.exports.ajouterPanier = function(res, id) {
+	model.panier.push(id);
+	res.send("Ajouté au panier : "+ id + ' <a href="http://localhost:3000/polypizz">Retour</a>');
+}
+
+module.exports.supprimerPanier = function(res, id) {
+	model.panier.splice(model.panier.indexOf(id), 1);
+	res.send("Supprimé du panier : "+ id + ' <a href="http://localhost:3000/polypizz/panier">Retour au panier</a>');
+}
+
+module.exports.commanderPanier = function(res) {
+	model.panier = [];
+	res.send('Merci d avoir passé commande ! <a href="http://localhost:3000/polypizz">Retour</a>');
 }

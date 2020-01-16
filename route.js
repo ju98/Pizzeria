@@ -44,4 +44,22 @@ const route=require('express').Router();
 		res.send("Voici l'offre du jour : "+ controller.afficherDailyOffer());
 	});
 
+	//PANIER
+	route.get('/polypizz/panier', function(req, res) {
+		controller.afficherPanier(res);
+	});
+
+	route.get('/polypizz/ajouterpanier/:id', function(req, res) {
+		controller.ajouterPanier(res, req.params.id);
+	});
+
+	route.get('/polypizz/supprimerpanier/:id', function(req, res) {
+		controller.supprimerPanier(res, req.params.id);
+	});
+
+	route.get('/polypizz/commander', function(req, res) {
+		controller.commanderPanier(res);
+	});
+
+
 module.exports=route;

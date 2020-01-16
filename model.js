@@ -2,6 +2,7 @@ module.exports.daily_offer=["Offre du dimanche", "Offre du lundi", "Offre du mar
 	"Offre du samedi"];
 	//getDay() retourne 0 pour dimanche, 1 pour lundi,...
 
+module.exports.panier=[];
 
 const mongoose=require('mongoose');
 var schemaAnswer=new mongoose.Schema({
