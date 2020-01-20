@@ -15,7 +15,11 @@ module.exports.showPizzas = function(res) {
 			result += '<tr><td>'+answer[i].key+'</td><td>'+answer[i].name+'</td><td>'+answer[i].ingredients+'</td><td>'+answer[i].category+'</td><td>'+answer[i].price+'</td><td><a href="./polypizz/ajouterPanier/'+answer[i].key+'">ajouter</a></td></tr>';
 		};
 
-		result += "</table></div></body></html>";
+		result += "</table></div>";
+
+		var date = new Date() //date actuelle 
+		var current_day = date.getDay()
+		result += '<br/><div>' + model.daily_offer[current_day] + '...</div></body></html>';
 		res.send(result);
 	});
 }
